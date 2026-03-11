@@ -1,0 +1,95 @@
+FamiliarMaggot.merge {
+    ai {
+        brain GenericBrain
+    }
+}
+
+FamiliarTumorousMaggot.merge {
+    ai {
+        brain GenericBrain
+    }
+}
+
+FamiliarChargeyMaggot.merge {
+    ai {
+        brain GenericBrain
+    }
+}
+
+FamiliarSwappyMaggot.merge {
+    ai {
+        brain GenericBrain
+    }
+}
+
+FamiliarPooter.merge {
+    ai {
+        brain GenericBrain
+    }
+}
+
+BuffFamiliarMaggot.merge {
+    ai {
+        brain GenericBrain
+    }
+}
+
+BuffFamiliarPooter.merge {
+    ai {
+        brain GenericBrain
+    }
+}
+
+BuffFamiliarFlea.merge {
+    ai {
+        brain GenericBrain
+    }
+}
+
+BuffFamiliarFly.merge {
+    ai {
+        brain GenericBrain
+    }
+}
+
+BestBuddy.merge {
+    ai {
+        brain GenericBrain
+    }
+}
+
+FamiliarFetus.merge {
+    ai {
+        brain GenericBrain
+    }
+}
+
+FamiliarFetusGusher.merge {
+    ai {
+        brain GenericBrain
+    }
+}
+
+FamiliarBrainDrain.merge {
+    ai {
+        brain GenericBrain
+    }
+}
+
+FamiliarKirbyFetus.merge {
+    ai {
+        brain GenericBrain
+    }
+}
+
+CharmedHyde.merge {
+    ai {
+        brain GenericBrain
+    }
+}
+
+FamiliarFleshLad.merge {
+    ai {
+        brain GenericBrain
+    }
+}

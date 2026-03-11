@@ -1,0 +1,172 @@
+// --- RANGED KITING SPECIALISTS ---
+// Goal: Keep the target at the absolute edge of range to outrun 3-move enemies (e.g., Carnibulb).
+
+smart_hunter_move.merge {
+    distance_to_enemy 2
+    distance_to_ally 0
+    distance_to_character 0
+    // Use mov+reach (inspired by keep_max_ranged_distance) to back up while shooting
+    preferred_distance mov+reach
+    total_distance_moved 0.01
+    face_closest_enemy 1
+    danger_avoidance 3
+    // Raised to 5 (inspired by prefer_tall_grass_always_move [cite: 6]) to maximize evasion
+    tall_grass 5
+}
+
+smart_mage_move.merge {
+    distance_to_enemy 2
+    distance_to_ally 0
+    distance_to_character 0
+    // Maximum kiting
+    preferred_distance mov+reach
+    total_distance_moved 0.01
+    face_closest_enemy 1
+    danger_avoidance 3
+}
+
+smart_psychic_move.merge {
+    distance_to_enemy 3
+    distance_to_ally -1
+    distance_to_character 0
+    // Replace the fixed "8" with dynamic mov+reach logic
+    preferred_distance mov+reach
+    total_distance_moved 0.01
+    face_closest_enemy 1
+    danger_avoidance 3
+}
+
+smart_tinkerer_move.merge {
+    distance_to_enemy -1
+    distance_to_ally 0
+    distance_to_character 0
+    // Keeps distance from the enemy and from its own explosive turrets
+    preferred_distance mov+reach
+    total_distance_moved 0.01
+    face_closest_enemy 1
+    danger_avoidance 3
+}
+
+
+// --- FRONT LINE AND SUPPORT ---
+// Goal: The Tank blocks physically, the Cleric hides behind it.
+
+smart_tank_move.merge {
+    // Pushed to -2 to force contact and block corridors
+    distance_to_enemy -2
+    distance_to_ally -1
+    distance_to_character 0
+    preferred_distance 0
+    total_distance_moved 0.01
+    face_closest_enemy 1
+    // Adjusted to 1.5: protects the team but does not suicide into a Death Worm
+    danger_avoidance 1.5
+}
+
+smart_cleric_move.merge {
+    distance_to_enemy 1
+    distance_to_ally -2
+    distance_to_character 0
+    preferred_distance 2
+    total_distance_moved 0.01
+    face_closest_enemy 0
+    danger_avoidance 5
+}
+
+
+// --- MELEE FIGHTERS ---
+// Goal: Aggressive, but with enough survival instinct to avoid walking into lava on approach.
+
+smart_fighter_move.merge {
+    distance_to_enemy -2
+    distance_to_ally 0
+    distance_to_character 0
+    preferred_distance 0
+    total_distance_moved 0.01
+    face_closest_enemy 1
+    // Raised to 2 to survive movement hazards
+    danger_avoidance 2
+}
+
+smart_butcher_move.merge {
+    distance_to_enemy -2
+    distance_to_ally 0
+    distance_to_character 0
+    preferred_distance 0
+    total_distance_moved 0.01
+    face_closest_enemy 1
+    // Raised to 2 for environmental survival
+    danger_avoidance 2
+}
+
+smart_monk_move.merge {
+    distance_to_enemy -2
+    distance_to_ally 0
+    distance_to_character 0
+    preferred_distance 0
+    // Movement kept at 0.5 (similar to chaotic_runaway [cite: 4]) for agile hit & run
+    total_distance_moved 0.5
+    face_closest_enemy 1
+    danger_avoidance 2
+}
+
+smart_colorless_move.merge {
+    distance_to_enemy -1
+    distance_to_ally 0
+    distance_to_character 0
+    preferred_distance 1
+    total_distance_moved 0.01
+    face_closest_enemy 1
+    danger_avoidance 2
+}
+
+
+// --- SPECIAL AND EXTREME CLASSES ---
+
+smart_thief_move.merge {
+    distance_to_enemy -1
+    distance_to_ally 0
+    distance_to_character 0
+    preferred_distance 0
+    // Pushed to 10 (inspired by native stay_close_move_far [cite: 3]) to force full flanking (Backstab)
+    total_distance_moved 10
+    face_closest_enemy 1
+    danger_avoidance 3
+    tall_grass 5
+}
+
+smart_jester_move.merge {
+    distance_to_enemy -1
+    distance_to_ally 0
+    distance_to_character 0
+    preferred_distance 2
+    total_distance_moved 1.5
+    face_closest_enemy 1
+    // Pushed to 6 (inspired by bat_chaos_runaway [cite: 9, 10]) for unpredictable pathfinding
+    randomness 6
+    danger_avoidance 2
+}
+
+smart_druid_move.merge {
+    distance_to_enemy 0
+    distance_to_ally -1
+    distance_to_character 0
+    preferred_distance reach
+    total_distance_moved 0.01
+    face_closest_enemy 1
+    danger_avoidance 3
+    // Pushed to 5 to root in tall grass [cite: 6]
+    tall_grass 5
+}
+
+smart_necromancer_move.merge {
+    distance_to_enemy 1
+    // Absolute gravitational pull toward corpses (inspired by the native zombie preset)
+    distance_to_corpse -100
+    distance_to_ally 0
+    distance_to_character 0
+    preferred_distance mov
+    total_distance_moved 0.01
+    face_closest_enemy 1
+    danger_avoidance 3
+}

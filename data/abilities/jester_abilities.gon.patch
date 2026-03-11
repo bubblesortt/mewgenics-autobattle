@@ -1,0 +1,30 @@
+// =====================================================================
+// OPTIMIZED JESTER AI PATCH - CHAOS CONTROL
+// =====================================================================
+
+// --- 1. DISABLE RUSSIAN ROULETTE SPELLS ---
+// "SmartMetronome" uses a random skill from the game.
+// Over time it will eventually cast a suicidal spell or vaporize the team.
+SmartMetronome.merge { damage_instance { ai_base_score -99999 } }
+SmartMetronome2.merge { damage_instance { ai_base_score -99999 } }
+
+// "Bump" randomly teleports the target.
+// The AI can teleport a vaporizer boss (Carnibulb) directly onto a fragile ally.
+Bump.merge { damage_instance { ai_base_score -99999 } }
+Bump2.merge { damage_instance { ai_base_score -99999 } }
+
+
+// --- 2. RANDOM RESOURCE MANAGEMENT ---
+// "PowerUp" drains all of the caster's mana for random buffs.
+// Give it a negative score (-10) so the AI uses it only if it has no other option,
+// avoiding wasting all mana on useless buffs (e.g., giving "Thorns" to an archer).
+PowerUp.merge { damage_instance { ai_base_score -10 } }
+PowerUp2.merge { damage_instance { ai_base_score -10 } }
+
+
+// --- 3. RANGED ATTACKS (CONTROLLED CHAOS) ---
+// "RNGCannon" deals random damage or applies statuses.
+// Keep score at 0. The AI will cast it on enemies because it is a standard targeted attack,
+// with no risk of hitting allies.
+RNGCannon.merge { damage_instance { ai_base_score 0 } }
+RNGCannon2.merge { damage_instance { ai_base_score 0 } }

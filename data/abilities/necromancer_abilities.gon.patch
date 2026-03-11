@@ -1,0 +1,176 @@
+// =====================================================================
+// OPTIMIZED NECROMANCER AI PATCH - MASTER OF CORPSES AND SURVIVAL
+// =====================================================================
+
+// --- 1. DISABLE SUICIDAL AND FRATRICIDAL SPELLS ---
+// "AbsorbSoul" KILLS the targeted ally. That is unacceptable for AI.
+AbsorbSoul.merge { damage_instance { ai_base_score -99999 } }
+AbsorbSoul2.merge { damage_instance { ai_base_score -99999 } }
+
+// "Flatline" KILLS the Necromancer. Disabled.
+Flatline.merge { damage_instance { ai_base_score -99999 } }
+Flatline2.merge { damage_instance { ai_base_score -99999 } }
+
+// "Seppuku" KILLS the Necromancer (Last Gasp passive bonus).
+Seppuku.merge { damage_instance { ai_base_score -99999 } }
+
+// "SlitWrists" (OneWithNothing passive bonus) deals self-damage.
+SlitWrists.merge { damage_instance { ai_base_score -99999 } }
+
+// "DemonicPact" inflicts a random injury on the caster.
+DemonicPact.merge { damage_instance { ai_base_score -99999 } }
+DemonicPact2.merge { damage_instance { ai_base_score -99999 } }
+
+
+// --- 2. HP SACRIFICE MANAGEMENT (Vaporization risk) ---
+// The Necromancer should only use these spells if it has plenty of health.
+// If health is low, the score becomes negative to avoid death.
+
+BloodGeyser.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_HealthThreshold { threshold_percent 50% } Else { FlatAIBonus -999999 } } } } }
+BloodGeyser2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_HealthThreshold { threshold_percent 50% } Else { FlatAIBonus -999999 } } } } }
+
+SoulTransfer.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_HealthThreshold { threshold_percent 50% } Else { FlatAIBonus -999999 } } } } }
+SoulTransfer2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_HealthThreshold { threshold_percent 50% } Else { FlatAIBonus -999999 } } } } }
+
+DonateBlood.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_HealthThreshold { threshold_percent 50% } Else { FlatAIBonus -999999 } } } } }
+DonateBlood2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_HealthThreshold { threshold_percent 50% } Else { FlatAIBonus -999999 } } } } }
+
+TradeLife.merge { damage_instance { ai_base_score -5 } } // Trading life with an ally is too risky algorithmically.
+TradeLife2.merge { damage_instance { ai_base_score -5 } }
+
+
+// --- 3. PRIORITIZE REANIMATIONS AND SUMMONS (CANNON FODDER) ---
+// The Necromancer should flood the map with corpses and familiars to protect the group.
+Reanimate.merge { damage_instance { ai_base_score 100 } }
+Reanimate2.merge { damage_instance { ai_base_score 100 } }
+
+AnimateDead.merge { damage_instance { ai_base_score 90 } }
+AnimateDead2.merge { damage_instance { ai_base_score 90 } }
+
+RaiseTheDead.merge { damage_instance { ai_base_score 80 } }
+RaiseTheDead2.merge { damage_instance { ai_base_score 80 } }
+
+SummonBones.merge { damage_instance { ai_base_score 75 } }
+SummonBones2.merge { damage_instance { ai_base_score 75 } }
+
+MaggotArmy.merge { damage_instance { ai_base_score 75 } }
+MaggotArmy2.merge { damage_instance { ai_base_score 75 } }
+
+SummonShade.merge { damage_instance { ai_base_score 70 } }
+SummonShade2.merge { damage_instance { ai_base_score 70 } }
+
+FleshGolem.merge { damage_instance { ai_base_score 85 } }
+FleshGolem2.merge { damage_instance { ai_base_score 85 } }
+
+
+// --- 4. AFTERLIFE SKILL MANAGEMENT (WHEN THE NECROMANCER IS A CORPSE) ---
+// The AI should use these aggressively if it is already dead (corpse),
+// because it is technically invulnerable (until resurrection or corpse vaporization).
+CarrionShot_Afterlife.merge { damage_instance { ai_base_score 50 } }
+CarrionShot_Afterlife2.merge { damage_instance { ai_base_score 50 } }
+
+LifeDrain_Afterlife.merge { damage_instance { ai_base_score 50 } }
+LifeDrain_Afterlife2.merge { damage_instance { ai_base_score 50 } }
+
+CoffinFlop_Afterlife.merge { damage_instance { ai_base_score 50 } }
+CoffinFlop_Afterlife2.merge { damage_instance { ai_base_score 50 } }
+
+Seance_Afterlife.merge { damage_instance { ai_base_score 50 } }
+Seance_Afterlife2.merge { damage_instance { ai_base_score 50 } }
+
+DonateBlood_Afterlife.merge { damage_instance { ai_base_score 50 } }
+DonateBlood_Afterlife2.merge { damage_instance { ai_base_score 50 } }
+
+TradeLife_Afterlife.merge { damage_instance { ai_base_score -5 } } // Still risky
+TradeLife_Afterlife2.merge { damage_instance { ai_base_score -5 } }
+
+
+// --- 5. CROWD CONTROL AND SURVIVAL ---
+// "Scare" (Fear and Knockback) is perfect for pushing a boss away.
+Scare.merge { damage_instance { ai_base_score 60 custom_additional_ai_weight avoid_redundant_debuffs } }
+Scare2.merge { damage_instance { ai_base_score 60 custom_additional_ai_weight avoid_redundant_debuffs } }
+
+// "GoLimp" (Injury Immunity) is excellent if the Necromancer is targeted.
+GoLimp.merge { damage_instance { ai_base_score 40 effects { Conditional_Speculative { Conditional_SourceHasStatus { status TempInjuryImmunity FlatAIBonus -999999 } } } } }
+GoLimp2.merge { damage_instance { ai_base_score 40 effects { Conditional_Speculative { Conditional_SourceHasStatus { status TempInjuryImmunity FlatAIBonus -999999 } } } } }
+
+// Teleports for kiting
+DarkStep.merge { damage_instance { ai_base_score 80 } }
+DarkStep2.merge { damage_instance { ai_base_score 80 } }
+Reap.merge { damage_instance { ai_base_score 80 } }
+Reap2.merge { damage_instance { ai_base_score 80 } }
+Gravecrawl.merge { damage_instance { ai_base_score 80 } }
+Gravecrawl2.merge { damage_instance { ai_base_score 80 } }
+
+
+// --- 6. DISABLE DANGEROUS AOE DAMAGE SPELLS ---
+// "Pestilence", "LeechSwarm", "Shriek", and "ForbiddenFamine" hit everyone (including allies).
+Pestilence.merge { damage_instance { ai_base_score -99999 } }
+Pestilence2.merge { damage_instance { ai_base_score -99999 } }
+LeechSwarm.merge { damage_instance { ai_base_score -99999 } }
+LeechSwarm2.merge { damage_instance { ai_base_score -99999 } }
+Shriek.merge { damage_instance { ai_base_score -99999 } }
+Shriek2.merge { damage_instance { ai_base_score -99999 } }
+ForbiddenFamine.merge { damage_instance { ai_base_score -99999 } }
+ForbiddenFamine2.merge { damage_instance { ai_base_score -99999 } }
+
+
+// --- 7. STANDARD SPELLS (Left to organic evaluation) ---
+Rebirth.merge { damage_instance { ai_base_score 0 } }
+Rebirth2.merge { damage_instance { ai_base_score 0 } }
+Weakness.merge { damage_instance { ai_base_score 0 custom_additional_ai_weight avoid_redundant_debuffs } }
+Weakness2.merge { damage_instance { ai_base_score 0 custom_additional_ai_weight avoid_redundant_debuffs } }
+SoulSuck.merge { damage_instance { ai_base_score 0 } }
+SoulSuck2.merge { damage_instance { ai_base_score 0 } }
+EvilIncarnate.merge { damage_instance { ai_base_score 0 } }
+EvilIncarnate2.merge { damage_instance { ai_base_score 0 } }
+SoulLink.merge { damage_instance { ai_base_score 0 } }
+SoulLink2.merge { damage_instance { ai_base_score 0 } }
+WeAreOne.merge { damage_instance { ai_base_score -5 } } // Slight penalty because SoulLink
+WeAreOne2.merge { damage_instance { ai_base_score -5 } }
+BloodRain.merge { damage_instance { ai_base_score 0 } }
+BloodRain2.merge { damage_instance { ai_base_score 0 } }
+DeathBloom.merge { damage_instance { ai_base_score 0 } }
+DeathBloom2.merge { damage_instance { ai_base_score 0 } }
+Whisper.merge { damage_instance { ai_base_score 0 } }
+Whisper2.merge { damage_instance { ai_base_score 0 } }
+Leeches.merge { damage_instance { ai_base_score 0 custom_additional_ai_weight avoid_redundant_debuffs } }
+Leeches2.merge { damage_instance { ai_base_score 0 custom_additional_ai_weight avoid_redundant_debuffs } }
+FullMoon.merge { damage_instance { ai_base_score 0 } }
+FullMoon2.merge { damage_instance { ai_base_score 0 } }
+Unearth.merge { damage_instance { ai_base_score 0 } }
+Unearth2.merge { damage_instance { ai_base_score 0 } }
+Bloodletting.merge { damage_instance { ai_base_score 0 } }
+Bloodletting2.merge { damage_instance { ai_base_score 0 } }
+MassPsychosis.merge { damage_instance { ai_base_score 0 } }
+MassPsychosis2.merge { damage_instance { ai_base_score 0 } }
+Debone.merge { damage_instance { ai_base_score 0 } }
+Debone2.merge { damage_instance { ai_base_score 0 } }
+Haunt.merge { damage_instance { ai_base_score 0 } }
+Spook.merge { damage_instance { ai_base_score 0 } }
+CarrionShot.merge { damage_instance { ai_base_score 0 } }
+CarrionShot2.merge { damage_instance { ai_base_score 0 } }
+LifeDrain.merge { damage_instance { ai_base_score 0 } }
+LifeDrain2.merge { damage_instance { ai_base_score 0 } }
+CoffinFlop.merge { damage_instance { ai_base_score 0 } }
+CoffinFlop2.merge { damage_instance { ai_base_score 0 } }
+Seance.merge { damage_instance { ai_base_score 0 } }
+Seance2.merge { damage_instance { ai_base_score 0 } }
+Curse.merge { damage_instance { ai_base_score 0 } }
+Curse2.merge { damage_instance { ai_base_score 0 } }
+RandomReap.merge { damage_instance { ai_base_score 0 } }
+RandomReap2.merge { damage_instance { ai_base_score 0 } }
+LastGasp.merge { damage_instance { ai_base_score 0 } }
+LastGasp2.merge { damage_instance { ai_base_score 0 } }
+Replace.merge { damage_instance { ai_base_score 0 } }
+Replace2.merge { damage_instance { ai_base_score 0 } }
+RandomSoulLink.merge { damage_instance { ai_base_score 0 } }
+RandomDualSoulLink.merge { damage_instance { ai_base_score 0 } }
+GigaDrain.merge { damage_instance { ai_base_score 0 } }
+GigaDrain2.merge { damage_instance { ai_base_score 0 } }
+SpiderEgg.merge { damage_instance { ai_base_score 0 } }
+SpiderEgg2.merge { damage_instance { ai_base_score 0 } }
+ClewOfLeeches.merge { damage_instance { ai_base_score 0 } }
+ClewOfLeeches2.merge { damage_instance { ai_base_score 0 } }
+DigUpTheDead.merge { damage_instance { ai_base_score 0 } }
+DigUpTheDead2.merge { damage_instance { ai_base_score 0 } }

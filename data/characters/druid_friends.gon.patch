@@ -1,0 +1,53 @@
+Crow.merge {
+    ai {
+        brain GenericBrain
+    }
+}
+
+BabySquirrel.merge {
+    ai {
+        brain GenericBrain
+    }
+}
+
+Squirrel.merge {
+    ai {
+        brain GenericBrain
+    }
+}
+
+Snake.merge {
+    ai {
+        brain GenericBrain
+    }
+}
+
+Turtle.merge {
+    ai {
+        brain GenericBrain
+    }
+}
+
+Toad.merge {
+    ai {
+        brain GenericBrain
+    }
+}
+
+Bear.merge {
+    ai {
+        brain GenericBrain
+    }
+}
+
+Catepillar.merge {
+    ai {
+        brain GenericBrain
+    }
+}
+
+Moth.merge {
+    ai {
+        brain GenericBrain
+    }
+}

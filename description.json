@@ -1,0 +1,6 @@
+{
+	"title": "mewgenics-autobattle",
+	"description": "Improves auto-battle AI with class-specific behavior, giving each class its own decision and movement presets.",
+	"author": "bubblesortt",
+	"version": "1.0"
+}

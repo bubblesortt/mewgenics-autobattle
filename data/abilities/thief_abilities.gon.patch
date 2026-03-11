@@ -1,0 +1,126 @@
+// =====================================================================
+// OPTIMIZED THIEF AI PATCH - ASSASSIN AND KITER
+// =====================================================================
+
+// --- 1. LETHAL STRIKE CHECKS (ASSASSINATIONS) ---
+// The Thief is extremely fragile. It should only engage bosses in melee
+// if it has mathematical certainty to finish them.
+
+// Assassinate (10 base damage + piercing) - Threshold 10.
+Assassinate.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 10 } Else { FlatAIBonus -999999 } } } } } }
+Assassinate2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 10 } Else { FlatAIBonus -999999 } } } } } }
+
+// Rebound (5 damage + knockback) - Score boosted for knockback utility, but do not jump on a boss if it will not kill / push enough.
+Rebound.merge { damage_instance { ai_base_score 50 } } // Higher score for defensive utility (kiting)
+Rebound2.merge { damage_instance { ai_base_score 50 } }
+
+// Slice (5 damage + piercing) - Threshold 5.
+Slice.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 5 } Else { FlatAIBonus -999999 } } } } } }
+Slice2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 5 } Else { FlatAIBonus -999999 } } } } } }
+
+// Shank (2 hits, depends on positioning) - Threshold 3.
+Shank.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 3 } Else { FlatAIBonus -999999 } } } } } }
+Shank2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 3 } Else { FlatAIBonus -999999 } } } } } }
+
+// StealKidney & StealLuck & StealTime (very low base damage) - Forbidden on bosses.
+StealKidney.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { FlatAIBonus -999999 } } } } }
+StealKidney2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { FlatAIBonus -999999 } } } } }
+StealLuck.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { FlatAIBonus -999999 } } } } }
+StealLuck2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { FlatAIBonus -999999 } } } } }
+StealTime.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { FlatAIBonus -999999 } } } } }
+StealTime2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { FlatAIBonus -999999 } } } } }
+
+
+// --- 2. SURVIVAL AND DODGE (EMERGENCY BUTTONS) ---
+// The Thief should spam these to escape threats.
+
+// Outskirts teleports the Thief to the map edges. Perfect to escape a boss.
+Outskirts.merge { damage_instance { ai_base_score 80 } }
+Outskirts2.merge { damage_instance { ai_base_score 80 } }
+
+// Backflip enables a reactive dodge (BackflipDodge). Excellent defensive buff.
+Backflip.merge { damage_instance { ai_base_score 75 } }
+Backflip2.merge { damage_instance { ai_base_score 75 } }
+
+// Blur drastically increases dodge chance (DodgeChance).
+Blur.merge { damage_instance { ai_base_score 70 effects { Conditional_Speculative { Conditional_SourceHasStatus { status DodgeChance_Status FlatAIBonus -999999 } } } } }
+Blur2.merge { damage_instance { ai_base_score 70 effects { Conditional_Speculative { Conditional_SourceHasStatus { status DodgeChance_Status FlatAIBonus -999999 } } } } }
+
+// Fade applies Stealth, preventing the boss from targeting the Thief.
+Fade.merge { damage_instance { ai_base_score 70 effects { Conditional_Speculative { Conditional_SourceHasStatus { status Stealth FlatAIBonus -999999 } } } } }
+Fade2.merge { damage_instance { ai_base_score 70 effects { Conditional_Speculative { Conditional_SourceHasStatus { status Stealth FlatAIBonus -999999 } } } } }
+
+
+// --- 3. RANGED HARASSMENT AND ZONE CONTROL ---
+// If the AI cannot kill in melee, it will throw kunai and traps.
+
+PoisonGas.merge { damage_instance { ai_base_score 40 custom_additional_ai_weight avoid_redundant_debuffs } }
+PoisonGas2.merge { damage_instance { ai_base_score 40 custom_additional_ai_weight avoid_redundant_debuffs } }
+
+Caltrops.merge { damage_instance { ai_base_score 60 } } // Ground traps, very useful for blocking.
+Caltrops2.merge { damage_instance { ai_base_score 60 } }
+
+Chakram.merge { damage_instance { ai_base_score 0 } }
+Chakram2.merge { damage_instance { ai_base_score 0 } }
+
+PoisonNail.merge { damage_instance { ai_base_score 0 } }
+PoisonNail2.merge { damage_instance { ai_base_score 0 } }
+
+VenomBarrage.merge { damage_instance { ai_base_score 0 } }
+VenomBarrage2.merge { damage_instance { ai_base_score 0 } }
+
+
+// --- 4. DISABLE SUICIDAL OR TEAM-ANNOYING SPELLS ---
+// "ThiefSwap" swaps the Thief with an ally. If the ally is the Tank, the boss is released.
+// If it swaps with the Mage and throws them in front of the boss, it is a wipe. Disable it.
+ThiefSwap.merge { damage_instance { ai_base_score -99999 } }
+ThiefSwap2.merge { damage_instance { ai_base_score -99999 } }
+ThiefSwapBack.merge { damage_instance { ai_base_score -99999 } }
+
+// Jitter applies AoE Confusion and can hit allies. Too risky.
+Jitter.merge { damage_instance { ai_base_score -99999 } }
+Jitter2.merge { damage_instance { ai_base_score -99999 } }
+
+// CoinToss is "free" if the Thief picks up the coin, which can lock the AI
+// into an infinite coin pickup loop instead of attacking. Apply a small penalty.
+CoinToss.merge { damage_instance { ai_base_score -10 } }
+CoinToss2.merge { damage_instance { ai_base_score -10 } }
+
+
+// --- 5. ECONOMY BUFFS AND UTILITY (NORMAL MANAGEMENT) ---
+
+Camouflage.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_SourceHasStatus { status Stealth FlatAIBonus -999999 } } } } }
+Camouflage2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_SourceHasStatus { status Stealth FlatAIBonus -999999 } } } } }
+
+MoveAgain.merge { damage_instance { ai_base_score 25 } }
+MoveAgain2.merge { damage_instance { ai_base_score 25 } }
+
+AttackAgain.merge { damage_instance { ai_base_score 20 } }
+AttackAgain2.merge { damage_instance { ai_base_score 20 } }
+
+TimeWalk.merge { damage_instance { ai_base_score 40 } } // Extra turn!
+TimeWalk2.merge { damage_instance { ai_base_score 40 } }
+
+Stalk.merge { damage_instance { ai_base_score 15 } }
+Stalk2.merge { damage_instance { ai_base_score 15 } }
+
+DoubleLoot.merge { damage_instance { ai_base_score 0 } }
+DoubleLoot2.merge { damage_instance { ai_base_score 0 } }
+
+LootCorpse.merge { damage_instance { ai_base_score 0 } }
+LootCorpse2.merge { damage_instance { ai_base_score 0 } }
+
+Cheat.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_SourceHasStatus { status LuckUp FlatAIBonus -999999 } } } } }
+Cheat2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_SourceHasStatus { status LuckUp FlatAIBonus -999999 } } } } }
+
+Pierce.merge { damage_instance { ai_base_score 0 } }
+Pierce2.merge { damage_instance { ai_base_score 0 } }
+
+WindUp.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_SourceHasStatus { status TempRangeUp FlatAIBonus -999999 } } } } }
+WindUp2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_SourceHasStatus { status RangeUp FlatAIBonus -999999 } } } } }
+
+Double.merge { damage_instance { ai_base_score 0 } }
+Double2.merge { damage_instance { ai_base_score 0 } }
+
+BoostBackstab.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_SourceHasStatus { status TempBackstab FlatAIBonus -999999 } } } } }
+BoostBackstab2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_SourceHasStatus { status TempBackstab FlatAIBonus -999999 } } } } }

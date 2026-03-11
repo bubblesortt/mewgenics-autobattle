@@ -1,0 +1,170 @@
+// =====================================================================
+// OPTIMIZED TANK AI PATCH - IMPENETRABLE WALL AND PROTECTOR
+// =====================================================================
+
+// --- 1. ABSOLUTE AGGRO PRIORITY (TAUNTING) ---
+// These abilities force bosses to attack the Tank, saving the rest of the team.
+// The AI should use them as soon as an enemy is in range.
+Taunt.merge { damage_instance { ai_base_score 80 } }
+Taunt2.merge { damage_instance { ai_base_score 80 } }
+
+DrawAttention.merge { damage_instance { ai_base_score 75 } }
+DrawAttention2.merge { damage_instance { ai_base_score 75 } }
+
+Intimidate.merge { damage_instance { ai_base_score 70 } } // Applies Fear, excellent defensive debuff.
+Intimidate2.merge { damage_instance { ai_base_score 70 } }
+
+BodyGuard.merge { damage_instance { ai_base_score 85 } } // Lets the Tank take hits for an ally.
+BodyGuard2.merge { damage_instance { ai_base_score 85 } }
+
+
+// --- 2. HEAVY KNOCKBACKS AND CROWD CONTROL ---
+// If a boss gets too close, the Tank should send it flying.
+Toss.merge { damage_instance { ai_base_score 60 } }
+Toss2.merge { damage_instance { ai_base_score 60 } }
+BonusToss.merge { damage_instance { ai_base_score 60 } }
+BonusToss2.merge { damage_instance { ai_base_score 60 } }
+NubbyToss.merge { damage_instance { ai_base_score 60 } }
+NubbyToss2.merge { damage_instance { ai_base_score 60 } }
+
+BatterUp.merge { damage_instance { ai_base_score 50 } } // Huge knockback.
+BatterUp2.merge { damage_instance { ai_base_score 50 } }
+
+Suplex.merge { damage_instance { ai_base_score 45 } } // Immobilizes and relocates.
+Suplex2.merge { damage_instance { ai_base_score 45 } }
+
+RockTomb.merge { damage_instance { ai_base_score 65 } } // Petrifies (hard stun).
+RockTomb2.merge { damage_instance { ai_base_score 65 } }
+
+Fissure.merge { damage_instance { ai_base_score 65 } } // AoE petrify.
+Fissure2.merge { damage_instance { ai_base_score 65 } }
+
+StoneGaze.merge { damage_instance { ai_base_score 65 } } // Line petrify.
+StoneGaze2.merge { damage_instance { ai_base_score 65 } }
+
+Medusa.merge { damage_instance { ai_base_score 70 } } // Massive AoE petrify.
+Medusa2.merge { damage_instance { ai_base_score 70 } }
+
+
+// --- 3. LETHAL STRIKE CHECKS (MELEE) ---
+// The Tank should only hit a boss in melee if it can finish it.
+HeadButt.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 1 } Else { FlatAIBonus -999999 } } } } } }
+HeadButt2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 5 } Else { FlatAIBonus -999999 } } } } } }
+
+Chew.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 5 } Else { FlatAIBonus -999999 } } } } } }
+Chew2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 5 } Else { FlatAIBonus -999999 } } } } } }
+
+BackBreaker.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 3 } Else { FlatAIBonus -999999 } } } } } }
+BackBreaker2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 3 } Else { FlatAIBonus -999999 } } } } } }
+
+Gore.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 2 } Else { FlatAIBonus -999999 } } } } } }
+Gore2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 4 } Else { FlatAIBonus -999999 } } } } } }
+
+Lunge.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 5 } Else { FlatAIBonus -999999 } } } } } }
+Lunge2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 5 } Else { FlatAIBonus -999999 } } } } } }
+
+Nudge.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 0 } Else { FlatAIBonus -999999 } } } } } }
+Nudge2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 0 } Else { FlatAIBonus -999999 } } } } } }
+
+// FullForce scales with the caster's CON, hard to predict precisely. Ban on bosses unless very sure.
+FullForce.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 5 } Else { FlatAIBonus -999999 } } } } } }
+FullForce2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 5 } Else { FlatAIBonus -999999 } } } } } }
+
+
+// --- 4. DISABLE SELF-DESTRUCTIVE OR POSITION-BREAKING SPELLS ---
+// TankTantrum creates random rocks that can hurt the team and block paths.
+TankTantrum.merge { damage_instance { ai_base_score -99999 } }
+TankTantrum2.merge { damage_instance { ai_base_score -99999 } }
+
+// BellyFlop and CatapultJump are jumps that isolate the Tank among enemies,
+// breaking the front line and exposing the rest of the group.
+BellyFlop.merge { damage_instance { ai_base_score -99999 } }
+BellyFlop2.merge { damage_instance { ai_base_score -99999 } }
+CatapultJump.merge { damage_instance { ai_base_score -99999 } }
+CatapultJump2.merge { damage_instance { ai_base_score -99999 } }
+FlipFlop.merge { damage_instance { ai_base_score -99999 } }
+FlipFlop2.merge { damage_instance { ai_base_score -99999 } }
+
+// TankSwap can swap with the Mage or Hunter, putting them on the front line. Fatal.
+TankSwap.merge { damage_instance { ai_base_score -99999 } }
+TankSwap2.merge { damage_instance { ai_base_score -99999 } }
+
+
+// --- 5. BUFFS AND DEFENSE (MODERATE SCORE) ---
+// The AI will use these if there is no urgent need to knock back or taunt.
+ThrowShield.merge { damage_instance { ai_base_score 30 custom_additional_ai_weight favor_if_unshielded } }
+ThrowShield2.merge { damage_instance { ai_base_score 30 custom_additional_ai_weight favor_if_unshielded } }
+
+ChewCud.merge { damage_instance { ai_base_score 20 custom_additional_ai_weight must_heal_most_missing_health } }
+ChewCud2.merge { damage_instance { ai_base_score 20 custom_additional_ai_weight must_heal_most_missing_health } }
+
+Supper.merge { damage_instance { ai_base_score 25 custom_additional_ai_weight must_heal_most_missing_health } }
+Supper2.merge { damage_instance { ai_base_score 25 custom_additional_ai_weight must_heal_most_missing_health } }
+
+PlantFeet.merge { damage_instance { ai_base_score 20 custom_additional_ai_weight favor_if_unshielded } }
+PlantFeet2.merge { damage_instance { ai_base_score 20 custom_additional_ai_weight favor_if_unshielded } }
+
+Spur.merge { damage_instance { ai_base_score 20 effects { Conditional_Speculative { Conditional_SourceHasStatus { status Thorns FlatAIBonus -999999 } } } } }
+Spur2.merge { damage_instance { ai_base_score 20 effects { Conditional_Speculative { Conditional_SourceHasStatus { status Thorns FlatAIBonus -999999 } } } } }
+
+Thicken.merge { damage_instance { ai_base_score 15 } }
+Thicken2.merge { damage_instance { ai_base_score 15 } }
+
+// BarbedWire, Anchor, and SteelSkin are useful buffs but can be spammed.
+// Original penalties (-10 / -999) are a bit too harsh. Balance to 0 for normal use.
+BarbedWire.merge { damage_instance { ai_base_score 30 custom_additional_ai_weight tile_close_to_enemy effects { Conditional_Speculative { Conditional_SourceHasStatus { status Thorns FlatAIBonus -999999 } } } } }
+BarbedWire2.merge { damage_instance { ai_base_score 30 custom_additional_ai_weight tile_close_to_enemy effects { Conditional_Speculative { Conditional_SourceHasStatus { status Thorns FlatAIBonus -999999 } } } } }
+
+// Anchor grants Brace. Only cast if the enemy is close and does not already have Brace.
+Anchor.merge { damage_instance { ai_base_score 30 custom_additional_ai_weight tile_close_to_enemy effects { Conditional_Speculative { Conditional_SourceHasStatus { status Brace FlatAIBonus -999999 } } } } }
+Anchor2.merge { damage_instance { ai_base_score 30 custom_additional_ai_weight tile_close_to_enemy effects { Conditional_Speculative { Conditional_SourceHasStatus { status Brace FlatAIBonus -999999 } } } } }
+
+// SteelSkin grants Brace. Same anti-spam safety.
+SteelSkin.merge { damage_instance { ai_base_score 30 effects { Conditional_Speculative { Conditional_SourceHasStatus { status Brace FlatAIBonus -999999 } } } } }
+SteelSkin2.merge { damage_instance { ai_base_score 30 effects { Conditional_Speculative { Conditional_SourceHasStatus { status Brace FlatAIBonus -999999 } } } } }
+
+
+// --- 6. AOE ATTACKS, TERRAIN CREATION, AND CHARGES ---
+// Left at organic score (0) based on projected damage.
+AssBlast.merge { damage_instance { ai_base_score 0 } }
+AssBlast2.merge { damage_instance { ai_base_score 0 } }
+TankTrample.merge { damage_instance { ai_base_score 0 } }
+TankTrample2.merge { damage_instance { ai_base_score 0 } }
+Earthquake.merge { damage_instance { ai_base_score 0 } }
+Earthquake2.merge { damage_instance { ai_base_score 0 } }
+RockToss.merge { damage_instance { ai_base_score 0 } }
+RockToss2.merge { damage_instance { ai_base_score 0 } }
+BowlOver.merge { damage_instance { ai_base_score 0 } }
+BowlOver2.merge { damage_instance { ai_base_score 0 } }
+Clap.merge { damage_instance { ai_base_score 0 } }
+Clap2.merge { damage_instance { ai_base_score 0 } }
+TankRockSong.merge { damage_instance { ai_base_score 0 } }
+TankRockSong2.merge { damage_instance { ai_base_score 0 } }
+RockCrusher.merge { damage_instance { ai_base_score 0 } }
+RockCrusher2.merge { damage_instance { ai_base_score 0 } }
+RockBlast.merge { damage_instance { ai_base_score 0 } }
+RockBlast2.merge { damage_instance { ai_base_score 0 } }
+BearHug.merge { damage_instance { ai_base_score 0 } }
+BearHug2.merge { damage_instance { ai_base_score 0 } }
+BigRock.merge { damage_instance { ai_base_score 0 } }
+BigRock2.merge { damage_instance { ai_base_score 0 } }
+EatRock.merge { damage_instance { ai_base_score 0 } }
+EatRock2.merge { damage_instance { ai_base_score 0 } }
+IronHead.merge { damage_instance { ai_base_score 0 } }
+IronHead2.merge { damage_instance { ai_base_score 0 } }
+GangUp.merge { damage_instance { ai_base_score 0 } }
+GangUp2.merge { damage_instance { ai_base_score 0 } }
+Aftershock.merge { damage_instance { ai_base_score 0 } }
+Aftershock2.merge { damage_instance { ai_base_score 0 } }
+FaultLine.merge { damage_instance { ai_base_score 0 } }
+FaultLine2.merge { damage_instance { ai_base_score 0 } }
+Demolish.merge { damage_instance { ai_base_score 0 } }
+Demolish2.merge { damage_instance { ai_base_score 0 } }
+PushThrough.merge { damage_instance { ai_base_score 0 } }
+PushThrough2.merge { damage_instance { ai_base_score 0 } }
+Sandstorm.merge { damage_instance { ai_base_score 0 } }
+Sandstorm2.merge { damage_instance { ai_base_score 0 } }
+FollowUpDash.merge { damage_instance { ai_base_score 0 } }
+FollowUpDash2.merge { damage_instance { ai_base_score 0 } }
+ToTheRescue.merge { damage_instance { ai_base_score 0 } }
+ToTheRescue2.merge { damage_instance { ai_base_score 0 } }
