@@ -22,7 +22,7 @@ smart_default.merge {
     spawn_object_distance_to_enemy -.01
     spawn_object_distance_to_ally .0001
     negative_weight_scale .99
-    spend_mana_scale .30
+    spend_mana_scale .45
     consider_total_damage true
     consider_secondary_damage true
     accurate_knockback false
@@ -35,7 +35,7 @@ smart_hunter.merge {
     damage_enemy 2
     heal_ally 1
     heal_enemy -100
-    kill_enemy 20
+    kill_enemy 16
     kill_ally -9999
     debuff_ally -100
     buff_ally -100
@@ -54,7 +54,7 @@ smart_hunter.merge {
     spawn_object_distance_to_ally .0001
     spawn_object_preferred_distance 4
     negative_weight_scale .99
-    spend_mana_scale .30
+    spend_mana_scale .35
     consider_total_damage true
     consider_secondary_damage true
     accurate_knockback false
@@ -67,7 +67,7 @@ smart_fighter.merge {
     damage_enemy 1
     heal_ally 0
     heal_enemy -100
-    kill_enemy 100
+    kill_enemy 70
     kill_ally -9999
     debuff_ally -100
     buff_ally 0
@@ -85,7 +85,7 @@ smart_fighter.merge {
     spawn_object_distance_to_enemy -.01
     spawn_object_distance_to_ally .0001
     negative_weight_scale .99
-    spend_mana_scale .30
+    spend_mana_scale .40
     consider_total_damage true
     consider_secondary_damage true
     accurate_knockback false
@@ -98,7 +98,7 @@ smart_tank.merge {
     damage_enemy 1
     heal_ally 1
     heal_enemy -100
-    kill_enemy 8
+    kill_enemy 13
     kill_ally -9999
     debuff_ally -100
     buff_ally 1
@@ -116,7 +116,7 @@ smart_tank.merge {
     spawn_object_distance_to_enemy -.01
     spawn_object_distance_to_ally .0001
     negative_weight_scale .99
-    spend_mana_scale .30
+    spend_mana_scale .50
     consider_total_damage true
     consider_secondary_damage true
     accurate_knockback true
@@ -129,7 +129,7 @@ smart_mage.merge {
     damage_enemy 3
     heal_ally 1
     heal_enemy -100
-    kill_enemy 15
+    kill_enemy 12
     kill_ally -9999
     debuff_ally -100
     buff_ally 2
@@ -147,7 +147,7 @@ smart_mage.merge {
     spawn_object_distance_to_enemy -.01
     spawn_object_distance_to_ally .0001
     negative_weight_scale .99
-    spend_mana_scale .30
+    spend_mana_scale .32
     consider_total_damage true
     consider_secondary_damage true
     accurate_knockback false
@@ -164,22 +164,22 @@ smart_cleric.merge {
     kill_enemy 2
     kill_ally -9999
     debuff_ally -100
-    buff_ally 10
+    buff_ally 8
     debuff_enemy 2
     buff_enemy -100
     damage_self -1
-    heal_self 50
+    heal_self 30
     buff_self 1
     debuff_self -1
     damage_ally_corpse 0
     damage_enemy_corpse 0
-    revive_ally_corpse 100
+    revive_ally_corpse 90
     revive_enemy_corpse -1
     spawn_object 1
     spawn_object_distance_to_enemy -.01
     spawn_object_distance_to_ally .0001
     negative_weight_scale .99
-    spend_mana_scale .30
+    spend_mana_scale .55
     consider_total_damage true
     consider_secondary_damage true
     accurate_knockback false
@@ -192,7 +192,7 @@ smart_thief.merge {
     damage_enemy 2
     heal_ally 0
     heal_enemy -100
-    kill_enemy 100
+    kill_enemy 60
     kill_ally -9999
     debuff_ally -100
     buff_ally 0
@@ -210,7 +210,7 @@ smart_thief.merge {
     spawn_object_distance_to_enemy -.01
     spawn_object_distance_to_ally .0001
     negative_weight_scale .99
-    spend_mana_scale .30
+    spend_mana_scale .35
     consider_total_damage true
     consider_secondary_damage true
     accurate_knockback false
@@ -223,7 +223,7 @@ smart_butcher.merge {
     damage_enemy 1
     heal_ally 0
     heal_enemy -100
-    kill_enemy 100
+    kill_enemy 70
     kill_ally -9999
     debuff_ally -100
     buff_ally 0
@@ -241,7 +241,7 @@ smart_butcher.merge {
     spawn_object_distance_to_enemy -.01
     spawn_object_distance_to_ally .0001
     negative_weight_scale .99
-    spend_mana_scale .30
+    spend_mana_scale .40
     consider_total_damage true
     consider_secondary_damage true
     accurate_knockback false
@@ -272,7 +272,7 @@ smart_psychic.merge {
     spawn_object_distance_to_enemy -.01
     spawn_object_distance_to_ally .0001
     negative_weight_scale .99
-    spend_mana_scale .30
+    spend_mana_scale .40
     consider_total_damage true
     consider_secondary_damage true
     accurate_knockback false
@@ -303,7 +303,7 @@ smart_colorless.merge {
     spawn_object_distance_to_enemy -.01
     spawn_object_distance_to_ally .0001
     negative_weight_scale .99
-    spend_mana_scale .30
+    spend_mana_scale .45
     consider_total_damage true
     consider_secondary_damage true
     accurate_knockback false
@@ -334,7 +334,7 @@ smart_jester.merge {
     spawn_object_distance_to_enemy -.01
     spawn_object_distance_to_ally .0001
     negative_weight_scale .99
-    spend_mana_scale .30
+    spend_mana_scale .45
     consider_total_damage true
     consider_secondary_damage true
     accurate_knockback false
@@ -361,11 +361,11 @@ smart_druid.merge {
     damage_enemy_corpse 0
     revive_ally_corpse 1
     revive_enemy_corpse -1
-    spawn_object 8
+    spawn_object 7
     spawn_object_distance_to_enemy -.01
     spawn_object_distance_to_ally .0001
     negative_weight_scale .99
-    spend_mana_scale .30
+    spend_mana_scale .38
     consider_total_damage true
     consider_secondary_damage true
     accurate_knockback false
@@ -379,7 +379,7 @@ smart_monk.merge {
     damage_enemy 3
     heal_ally 0
     heal_enemy -100
-    kill_enemy 10
+    kill_enemy 8
     kill_ally -9999
     debuff_ally -100
     buff_ally 1
@@ -397,7 +397,7 @@ smart_monk.merge {
     spawn_object_distance_to_enemy -.01
     spawn_object_distance_to_ally .0001
     negative_weight_scale .99
-    spend_mana_scale .30
+    spend_mana_scale .40
     consider_total_damage true
     consider_secondary_damage true
     accurate_knockback false
@@ -420,15 +420,15 @@ smart_necromancer.merge {
     heal_self 2
     buff_self 1
     debuff_self -1
-    damage_ally_corpse 100
-    damage_enemy_corpse 100
-    revive_ally_corpse 100
+    damage_ally_corpse 70
+    damage_enemy_corpse 80
+    revive_ally_corpse 90
     revive_enemy_corpse -100
     spawn_object 5
     spawn_object_distance_to_enemy -.01
     spawn_object_distance_to_ally .0001
     negative_weight_scale .99
-    spend_mana_scale .30
+    spend_mana_scale .42
     consider_total_damage true
     consider_secondary_damage true
     accurate_knockback false
@@ -455,12 +455,12 @@ smart_tinkerer.merge {
     damage_enemy_corpse 0
     revive_ally_corpse 0
     revive_enemy_corpse -1
-    spawn_object 10
+    spawn_object 9
     spawn_object_distance_to_enemy -0.1
     spawn_object_distance_to_ally .0001
     spawn_object_preferred_distance 4
     negative_weight_scale .99
-    spend_mana_scale .30
+    spend_mana_scale .35
     consider_total_damage true
     consider_secondary_damage true
     accurate_knockback false

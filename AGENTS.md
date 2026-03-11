@@ -55,6 +55,10 @@ HeavyStrike.merge {
 }
 ```
 
+## Numeric Tuning Reference
+For concise numeric ranges, balancing tiers, and practical tuning workflow, use:
+- `docs/ai_numeric_tuning_guide.md`
+
 ## Agent Directives
 1. When modifying AI logic, prioritize surgical `.merge` or `.patch` files over outright `.overwrite` entire blobs.
 2. Ensure you never use JSON-style colons or quotes for simple STR dict keys.

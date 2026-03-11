@@ -37,7 +37,7 @@ smart_psychic_move.merge {
 }
 
 smart_tinkerer_move.merge {
-    distance_to_enemy -1
+    distance_to_enemy 2
     distance_to_ally 0
     distance_to_character 0
     // Keeps distance from the enemy and from its own explosive turrets
@@ -53,7 +53,7 @@ smart_tinkerer_move.merge {
 
 smart_tank_move.merge {
     // Pushed to -2 to force contact and block corridors
-    distance_to_enemy -2
+    distance_to_enemy -1.5
     distance_to_ally -1
     distance_to_character 0
     preferred_distance 0
@@ -69,7 +69,7 @@ smart_cleric_move.merge {
     distance_to_character 0
     preferred_distance 2
     total_distance_moved 0.01
-    face_closest_enemy 0
+    face_closest_enemy 1
     danger_avoidance 5
 }
 
@@ -128,8 +128,9 @@ smart_thief_move.merge {
     distance_to_ally 0
     distance_to_character 0
     preferred_distance 0
-    // Pushed to 10 (inspired by native stay_close_move_far [cite: 3]) to force full flanking (Backstab)
-    total_distance_moved 10
+    // Reduced from 10 to 6 to preserve flanking intent without over-committing pathing.
+    total_distance_moved 6
+    cap_total_distance_moved 6
     face_closest_enemy 1
     danger_avoidance 3
     tall_grass 5
@@ -142,8 +143,8 @@ smart_jester_move.merge {
     preferred_distance 2
     total_distance_moved 1.5
     face_closest_enemy 1
-    // Pushed to 6 (inspired by bat_chaos_runaway [cite: 9, 10]) for unpredictable pathfinding
-    randomness 6
+    // Reduced from 6 to 4 for controlled chaos without excessive drift.
+    randomness 4
     danger_avoidance 2
 }
 
@@ -161,12 +162,13 @@ smart_druid_move.merge {
 
 smart_necromancer_move.merge {
     distance_to_enemy 1
-    // Absolute gravitational pull toward corpses (inspired by the native zombie preset)
-    distance_to_corpse -100
+    // Strong pull toward corpses, but capped to avoid tunnel vision.
+    distance_to_corpse -35
+    cap_distance_to_corpse 6
     distance_to_ally 0
     distance_to_character 0
     preferred_distance mov
-    total_distance_moved 0.01
+    total_distance_moved 0.1
     face_closest_enemy 1
     danger_avoidance 3
 }
