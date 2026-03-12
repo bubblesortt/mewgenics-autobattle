@@ -1,0 +1,108 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version (x.y.z)"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve version and tag
+        id: meta
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+            VERSION="${{ inputs.version }}"
+            TAG="v${VERSION}"
+          else
+            TAG="${GITHUB_REF_NAME}"
+            VERSION="${TAG#v}"
+          fi
+
+          [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || {
+            echo "Invalid version: $VERSION"
+            exit 1
+          }
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Validate version files
+        shell: bash
+        run: |
+          set -euo pipefail
+          VERSION_FILE_VALUE="$(tr -d '[:space:]' < VERSION)"
+          DESCRIPTION_VALUE="$(jq -r '.version' description.json)"
+          TARGET_VERSION="${{ steps.meta.outputs.version }}"
+
+          [[ "$VERSION_FILE_VALUE" == "$TARGET_VERSION" ]] || {
+            echo "VERSION mismatch: VERSION=$VERSION_FILE_VALUE, tag=$TARGET_VERSION"
+            exit 1
+          }
+          [[ "$DESCRIPTION_VALUE" == "$TARGET_VERSION" ]] || {
+            echo "description.json mismatch: description.json=$DESCRIPTION_VALUE, tag=$TARGET_VERSION"
+            exit 1
+          }
+
+      - name: Install archivers
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y p7zip-full zip tar
+          sudo apt-get install -y rar || true
+
+      - name: Build archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          scripts/release.sh zip
+          scripts/release.sh tar
+          scripts/release.sh 7z
+
+          if command -v rar >/dev/null 2>&1; then
+            scripts/release.sh rar
+          else
+            echo "rar is not available on this runner. Skipping .rar."
+          fi
+
+      - name: Generate release notes from CHANGELOG
+        shell: bash
+        run: |
+          set -euo pipefail
+          scripts/changelog_extract.sh "${{ steps.meta.outputs.version }}" > RELEASE_NOTES.md
+          if [[ ! -s RELEASE_NOTES.md ]]; then
+            echo "No changelog entries for ${{ steps.meta.outputs.version }}." > RELEASE_NOTES.md
+          fi
+
+      - name: Create or update GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.meta.outputs.tag }}
+          name: mewgenics-autobattle v${{ steps.meta.outputs.version }}
+          body_path: RELEASE_NOTES.md
+          target_commitish: ${{ github.sha }}
+          files: |
+            dist/mewgenics-autobattle.zip
+            dist/mewgenics-autobattle.tar
+            dist/mewgenics-autobattle.7z
+            dist/mewgenics-autobattle.rar
+          fail_on_unmatched_files: false

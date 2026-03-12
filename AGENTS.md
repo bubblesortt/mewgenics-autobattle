@@ -63,3 +63,29 @@ For concise numeric ranges, balancing tiers, and practical tuning workflow, use:
 1. When modifying AI logic, prioritize surgical `.merge` or `.patch` files over outright `.overwrite` entire blobs.
 2. Ensure you never use JSON-style colons or quotes for simple STR dict keys.
 3. Be aware of `ai_base_score` manipulation for complex logic. Rely on existing `Conditional_` triggers defined in the game engine.
+
+## Mini Release Guide (For Agents)
+Use this flow when you need to ship a new version of the mod.
+
+1. Confirm changes are ready:
+   - `git status`
+2. Bump version and add a short release note:
+   - Patch release: `scripts/version.sh bump patch --note "Short summary"`
+   - Minor release: `scripts/version.sh bump minor --note "Short summary"`
+   - Major release: `scripts/version.sh bump major --note "Short summary"`
+3. Build release archives locally:
+   - `scripts/release.sh all`
+   - If `7z`/`rar` tools are missing locally, build available formats (`zip`, `tar`) and continue.
+4. Validate output:
+   - Archives are created in `dist/` as `mewgenics-autobattle.<ext>`.
+   - Each archive must contain only `data/` and `description.json`.
+5. Commit and push:
+   - `git add .`
+   - `git commit -m "release: vX.Y.Z"`
+   - `git push`
+6. Create and push tag:
+   - `git tag vX.Y.Z`
+   - `git push origin vX.Y.Z`
+7. Verify GitHub Release pipeline:
+   - Workflow `Release` should publish assets to GitHub Releases.
+   - Notes are pulled from the matching `CHANGELOG.md` section (`## [X.Y.Z]`).

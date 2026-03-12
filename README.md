@@ -9,6 +9,26 @@ Tanks will block damage and protect allies, Healers will prioritize saving dying
 2. The mod takes effect automatically during any auto-battle encounter.
 3. Your cats will immediately start using the new customized logic profiles (`smart_fighter`, `smart_mage`, `smart_cleric`, etc.).
 
+## Release Workflow
+- Version source of truth is `VERSION`.
+- `description.json` and `CHANGELOG.md` are updated via `scripts/version.sh`.
+- Bump version:
+  - `scripts/version.sh bump patch --note "Short release note"`
+  - `scripts/version.sh bump minor --note "Short release note"`
+  - `scripts/version.sh bump major --note "Short release note"`
+- Build archives named `mewgenics-autobattle.<ext>`:
+  - `scripts/release.sh zip`
+  - `scripts/release.sh tar`
+  - `scripts/release.sh 7z`
+  - `scripts/release.sh rar`
+  - `scripts/release.sh all`
+- Output directory: `dist/`.
+- Each archive contains exactly `data/` and `description.json`.
+- GitHub automation:
+  - Push tag `vX.Y.Z` (example: `v1.2.0`) and workflow will create/update GitHub Release.
+  - Release notes are taken from the matching `CHANGELOG.md` section (`## [X.Y.Z]`).
+  - Release assets are uploaded from `dist/`.
+
 ## How to Mod and Contribute
 You can tweak existing AI behaviors or add your own by modifying the files inside the `data/` directory. When the mod loads, the game applies the files in the `data/` folder over the base game files using Mewgenics's specialized patching system.
 
