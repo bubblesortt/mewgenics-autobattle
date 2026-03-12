@@ -4,30 +4,15 @@
 
 Tanks will block damage and protect allies, Healers will prioritize saving dying friends instead of dealing trivial damage, Assassins (Thieves) will try to execute backstabs, and Necromancers will efficiently manage corpses and avoid suicidal spells.
 
-## How to Use
-1. Install the mod by placing it into your active Mewgenics mods directory.
-2. The mod takes effect automatically during any auto-battle encounter.
-3. Your cats will immediately start using the new customized logic profiles (`smart_fighter`, `smart_mage`, `smart_cleric`, etc.).
+## How to Use / Installation Guide
 
-## Release Workflow
-- Version source of truth is `VERSION`.
-- `description.json` and `CHANGELOG.md` are updated via `scripts/version.sh`.
-- Bump version:
-  - `scripts/version.sh bump patch --note "Short release note"`
-  - `scripts/version.sh bump minor --note "Short release note"`
-  - `scripts/version.sh bump major --note "Short release note"`
-- Build archives named `mewgenics-autobattle.<ext>`:
-  - `scripts/release.sh zip`
-  - `scripts/release.sh tar`
-  - `scripts/release.sh 7z`
-  - `scripts/release.sh rar`
-  - `scripts/release.sh all`
-- Output directory: `dist/`.
-- Each archive contains exactly `data/` and `description.json`.
-- GitHub automation:
-  - Push tag `vX.Y.Z` (example: `v1.2.0`) and workflow will create/update GitHub Release.
-  - Release notes are taken from the matching `CHANGELOG.md` section (`## [X.Y.Z]`).
-  - Release assets are uploaded from `dist/`.
+1. Download the latest release archive (`mewgenics-autobattle.zip`) from the Releases page.
+2. Open **Mewtator** (the Mewgenics mod manager).
+3. Install the mod by dragging and dropping the downloaded archive into the Mewtator window, or manually extract it into your active mods directory managed by Mewtator.
+4. Make sure **mewgenics-autobattle** is enabled in the Mewtator mod list.
+5. Launch the game through Mewtator so the custom `data/` patches are applied correctly.
+6. The mod takes effect automatically during any battle encounter. Your cats will immediately start using the new customized logic profiles (`smart_fighter`, `smart_mage`, `smart_cleric`, etc.).
+
 
 ## How to Mod and Contribute
 You can tweak existing AI behaviors or add your own by modifying the files inside the `data/` directory. When the mod loads, the game applies the files in the `data/` folder over the base game files using Mewgenics's specialized patching system.
