@@ -26,5 +26,5 @@ PowerUp2.merge { damage_instance { ai_base_score -10 } }
 // "RNGCannon" deals random damage or applies statuses.
 // Keep score at 0. The AI will cast it on enemies because it is a standard targeted attack,
 // with no risk of hitting allies.
-RNGCannon.merge { damage_instance { ai_base_score 0 } }
-RNGCannon2.merge { damage_instance { ai_base_score 0 } }
+RNGCannon.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_HasStatus { status Counterspell } Then { FlatAIBonus -40 } } Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
+RNGCannon2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_HasStatus { status Counterspell } Then { FlatAIBonus -40 } } Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
