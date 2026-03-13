@@ -71,16 +71,16 @@ Emergency2.merge { damage_instance { ai_base_score 90 } }
 
 // --- 6. RANGED ATTACKS AND CONTROL (KITING) ---
 // Keep these organic; the AI will use them if the group is healthy.
-HolyLight.merge { damage_instance { ai_base_score 0 } }
-HolyLight2.merge { damage_instance { ai_base_score 0 } }
+HolyLight.merge { damage_instance { ai_base_score 0  effects { Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_HasStatus { status Sleep } Then { FlatAIBonus -30 } } Conditional_Speculative { Conditional_HasStatus { status Freeze } Then { FlatAIBonus -20 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
+HolyLight2.merge { damage_instance { ai_base_score 0  effects { Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_HasStatus { status Sleep } Then { FlatAIBonus -30 } } Conditional_Speculative { Conditional_HasStatus { status Freeze } Then { FlatAIBonus -20 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
 BlindingLight.merge { damage_instance { ai_base_score 0 custom_additional_ai_weight avoid_redundant_debuffs } }
 BlindingLight2.merge { damage_instance { ai_base_score 0 custom_additional_ai_weight avoid_redundant_debuffs } }
-WrathOfGod.merge { damage_instance { ai_base_score 0 } }
-WrathOfGod2.merge { damage_instance { ai_base_score 0 } }
+WrathOfGod.merge { damage_instance { ai_base_score 0  effects { Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_HasStatus { status Sleep } Then { FlatAIBonus -30 } } Conditional_Speculative { Conditional_HasStatus { status Freeze } Then { FlatAIBonus -20 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
+WrathOfGod2.merge { damage_instance { ai_base_score 0  effects { Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_HasStatus { status Sleep } Then { FlatAIBonus -30 } } Conditional_Speculative { Conditional_HasStatus { status Freeze } Then { FlatAIBonus -20 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
 Malaise.merge { damage_instance { ai_base_score 0 custom_additional_ai_weight avoid_redundant_debuffs } }
 Malaise2.merge { damage_instance { ai_base_score 0 custom_additional_ai_weight avoid_redundant_debuffs } }
-Rebuke.merge { damage_instance { ai_base_score 0 } }
-Rebuke2.merge { damage_instance { ai_base_score 0 } }
+Rebuke.merge { damage_instance { ai_base_score 0  effects { Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_HasStatus { status Sleep } Then { FlatAIBonus -30 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
+Rebuke2.merge { damage_instance { ai_base_score 0  effects { Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_HasStatus { status Sleep } Then { FlatAIBonus -30 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
 
 
 // --- 7. DISABLE ANNOYING OR UNRELIABLE SPELLS ---
@@ -96,8 +96,8 @@ FriendOrFoe2.merge { damage_instance { ai_base_score -99999 } }
 // --- 8. UTILITY AND ECONOMY SPELLS ---
 Prayer.merge { damage_instance { ai_base_score 10 } }
 Prayer2.merge { damage_instance { ai_base_score 10 } }
-Cleanse.merge { damage_instance { ai_base_score 20 } } // Useful to remove poisons/burns
-Cleanse2.merge { damage_instance { ai_base_score 20 } }
+Cleanse.merge { damage_instance { ai_base_score 20  effects { Conditional_Speculative { Conditional_HasCleansableDebuffs {} Then { FlatAIBonus 30 } } } } } // Useful to remove poisons/burns
+Cleanse2.merge { damage_instance { ai_base_score 20  effects { Conditional_Speculative { Conditional_HasCleansableDebuffs {} Then { FlatAIBonus 30 } } } } }
 Wish.merge { damage_instance { ai_base_score 0 } }
 Wish2.merge { damage_instance { ai_base_score 0 } }
 Baptism.merge { damage_instance { ai_base_score 0 } }
@@ -158,13 +158,4 @@ Grace2.merge { damage_instance { ai_base_score 0 } }
 // Cleanse gets bonus when ally has cleansable debuffs.
 // Offensive spells respect enemy CC statuses.
 
-Cleanse.merge { damage_instance { effects { Conditional_Speculative { Conditional_HasCleansableDebuffs {} Then { FlatAIBonus 30 } } } } }
-Cleanse2.merge { damage_instance { effects { Conditional_Speculative { Conditional_HasCleansableDebuffs {} Then { FlatAIBonus 30 } } } } }
-
 // --- Offensive cleric spells: respect enemy statuses ---
-HolyLight.merge { damage_instance { effects { Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_HasStatus { status Sleep } Then { FlatAIBonus -30 } } Conditional_Speculative { Conditional_HasStatus { status Freeze } Then { FlatAIBonus -20 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
-HolyLight2.merge { damage_instance { effects { Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_HasStatus { status Sleep } Then { FlatAIBonus -30 } } Conditional_Speculative { Conditional_HasStatus { status Freeze } Then { FlatAIBonus -20 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
-WrathOfGod.merge { damage_instance { effects { Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_HasStatus { status Sleep } Then { FlatAIBonus -30 } } Conditional_Speculative { Conditional_HasStatus { status Freeze } Then { FlatAIBonus -20 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
-WrathOfGod2.merge { damage_instance { effects { Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_HasStatus { status Sleep } Then { FlatAIBonus -30 } } Conditional_Speculative { Conditional_HasStatus { status Freeze } Then { FlatAIBonus -20 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
-Rebuke.merge { damage_instance { effects { Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_HasStatus { status Sleep } Then { FlatAIBonus -30 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
-Rebuke2.merge { damage_instance { effects { Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_HasStatus { status Sleep } Then { FlatAIBonus -30 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }

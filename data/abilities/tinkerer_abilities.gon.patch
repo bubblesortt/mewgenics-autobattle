@@ -35,13 +35,13 @@ DrillDown.merge { damage_instance { ai_base_score 0 effects { Conditional_Specul
 DrillDown2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { FlatAIBonus -999999 } } } } }
 
 // VoltTackle (5 damage)
-VoltTackle.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 5 } Else { FlatAIBonus -999999 } } } } } }
-VoltTackle2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 5 } Else { FlatAIBonus -999999 } } } } } }
+VoltTackle.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 5 } Else { FlatAIBonus -999999 } } }  Conditional_Speculative { Conditional_HasStatus { status Thorns } Then { FlatAIBonus -25 } } Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
+VoltTackle2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 5 } Else { FlatAIBonus -999999 } } }  Conditional_Speculative { Conditional_HasStatus { status Thorns } Then { FlatAIBonus -25 } } Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
 
 // RocketSkates (5 damage)
-RocketSkates.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 5 } Else { FlatAIBonus -999999 } } } } } }
-RocketSkates2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 5 } Else { FlatAIBonus -999999 } } } } } }
-RocketSkates_Bombchu.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 5 } Else { FlatAIBonus -999999 } } } } } }
+RocketSkates.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 5 } Else { FlatAIBonus -999999 } } }  Conditional_Speculative { Conditional_HasStatus { status Thorns } Then { FlatAIBonus -25 } } Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
+RocketSkates2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 5 } Else { FlatAIBonus -999999 } } }  Conditional_Speculative { Conditional_HasStatus { status Thorns } Then { FlatAIBonus -25 } } Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
+RocketSkates_Bombchu.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_Boss { Conditional_HealthThreshold { threshold_flat 5 } Else { FlatAIBonus -999999 } } }  Conditional_Speculative { Conditional_HasStatus { status Thorns } Then { FlatAIBonus -25 } } Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
 
 
 // --- 3. PRIORITIZE TOWER DEFENSE AND SUMMONS ---
@@ -110,15 +110,15 @@ SpareParts2.merge { damage_instance { ai_base_score 30 } }
 
 // --- 6. STANDARD OFFENSIVE SPELLS ---
 // Left to the AI engine to evaluate raw damage.
-Discharge.merge { damage_instance { ai_base_score 0 } }
-Discharge2.merge { damage_instance { ai_base_score 0 } }
+Discharge.merge { damage_instance { ai_base_score 0  effects { Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
+Discharge2.merge { damage_instance { ai_base_score 0  effects { Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
 DecoySwap.merge { damage_instance { ai_base_score 0 } }
 DecoyExplode.merge { damage_instance { ai_base_score 0 } }
 Flamethrower.merge { damage_instance { ai_base_score 0 } }
 TurretShot.merge { damage_instance { ai_base_score 0 } }
 RocketTurretShot.merge { damage_instance { ai_base_score 0 } }
-ElectricNail.merge { damage_instance { ai_base_score 0 } }
-ElectricNail2.merge { damage_instance { ai_base_score 0 } }
+ElectricNail.merge { damage_instance { ai_base_score 0  effects { Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
+ElectricNail2.merge { damage_instance { ai_base_score 0  effects { Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
 Math.merge { damage_instance { ai_base_score 0 } }
 Math2.merge { damage_instance { ai_base_score 0 } }
 Reprogram.merge { damage_instance { ai_base_score 0 } }
@@ -131,8 +131,8 @@ ShortCircuit.merge { damage_instance { ai_base_score 0 } }
 ShortCircuit2.merge { damage_instance { ai_base_score 0 } }
 Electrolyze.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_SourceHasStatus { status CurrentWeaponAddElectricElement FlatAIBonus -999999 } } } } }
 Electrolyze2.merge { damage_instance { ai_base_score 0 effects { Conditional_Speculative { Conditional_SourceHasStatus { status CurrentWeaponAddElectricElement FlatAIBonus -999999 } } } } }
-Firecrackers.merge { damage_instance { ai_base_score 0 } }
-Firecrackers2.merge { damage_instance { ai_base_score 0 } }
+Firecrackers.merge { damage_instance { ai_base_score 0  effects { Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
+Firecrackers2.merge { damage_instance { ai_base_score 0  effects { Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
 Upgrade.merge { damage_instance { ai_base_score 0 } }
 Upgrade2.merge { damage_instance { ai_base_score 0 } }
 Eureka.merge { damage_instance { ai_base_score 0 } }
@@ -143,8 +143,8 @@ UnreliableMissile.merge { damage_instance { ai_base_score 0 } }
 UnreliableMissile2.merge { damage_instance { ai_base_score 0 } }
 BatteryNuke.merge { damage_instance { ai_base_score 0 } }
 BatteryNuke2.merge { damage_instance { ai_base_score 0 } }
-ShockTherapy.merge { damage_instance { ai_base_score 0 } }
-ShockTherapy2.merge { damage_instance { ai_base_score 0 } }
+ShockTherapy.merge { damage_instance { ai_base_score 0  effects { Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
+ShockTherapy2.merge { damage_instance { ai_base_score 0  effects { Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
 BuildNuke.merge { damage_instance { ai_base_score 0 } }
 BuildNuke2.merge { damage_instance { ai_base_score 0 } }
 Smash.merge { damage_instance { ai_base_score 0 } }
@@ -158,25 +158,3 @@ RocketRide2.merge { damage_instance { ai_base_score 0 } }
 MechSuitPunch.merge { damage_instance { ai_base_score 0 } }
 MechSuitBarrage.merge { damage_instance { ai_base_score 0 } }
 MechSuitDash.merge { damage_instance { ai_base_score 0 } }
-
-
-// =====================================================================
-// --- 7. STATUS REACTIONS (SOFT PENALTIES) ---
-// =====================================================================
-// Tinkerer uses tech. Dash/melee attacks trigger Thorns.
-
-VoltTackle.merge { damage_instance { effects { Conditional_Speculative { Conditional_HasStatus { status Thorns } Then { FlatAIBonus -25 } } Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
-VoltTackle2.merge { damage_instance { effects { Conditional_Speculative { Conditional_HasStatus { status Thorns } Then { FlatAIBonus -25 } } Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
-RocketSkates.merge { damage_instance { effects { Conditional_Speculative { Conditional_HasStatus { status Thorns } Then { FlatAIBonus -25 } } Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
-RocketSkates2.merge { damage_instance { effects { Conditional_Speculative { Conditional_HasStatus { status Thorns } Then { FlatAIBonus -25 } } Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
-RocketSkates_Bombchu.merge { damage_instance { effects { Conditional_Speculative { Conditional_HasStatus { status Thorns } Then { FlatAIBonus -25 } } Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
-
-// Ranged Attacks
-Discharge.merge { damage_instance { effects { Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
-Discharge2.merge { damage_instance { effects { Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
-ElectricNail.merge { damage_instance { effects { Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
-ElectricNail2.merge { damage_instance { effects { Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
-Firecrackers.merge { damage_instance { effects { Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
-Firecrackers2.merge { damage_instance { effects { Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
-ShockTherapy.merge { damage_instance { effects { Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
-ShockTherapy2.merge { damage_instance { effects { Conditional_Speculative { Conditional_HasStatus { status Brace } Then { FlatAIBonus -15 } } Conditional_Speculative { Conditional_HasStatus { status AllDamageImmune } Then { FlatAIBonus -9999 } } Conditional_Speculative { Conditional_Enemy { Conditional_HealthThreshold { threshold_percent 25% } Then { FlatAIBonus 40 } } } } } }
