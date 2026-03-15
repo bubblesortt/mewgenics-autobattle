@@ -158,7 +158,7 @@ smart_mage.merge {
 // --- CLERIC / MEDIC Pure Healer ---
 smart_cleric.merge {
     damage_ally -9999
-    damage_enemy 1
+    damage_enemy 2
     heal_ally 100
     heal_enemy -100
     kill_enemy 2
@@ -175,7 +175,7 @@ smart_cleric.merge {
     damage_enemy_corpse 0
     revive_ally_corpse 90
     revive_enemy_corpse -1
-    spawn_object 1
+    spawn_object 0.5
     spawn_object_distance_to_enemy -.01
     spawn_object_distance_to_ally .0001
     negative_weight_scale .99

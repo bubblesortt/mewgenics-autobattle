@@ -124,8 +124,8 @@ WitchHunt.merge { damage_instance { ai_base_score 0 } }
 WitchHunt2.merge { damage_instance { ai_base_score 0 } }
 Benediction.merge { damage_instance { ai_base_score 0 } }
 Benediction2.merge { damage_instance { ai_base_score 0 } }
-HallowedGround.merge { damage_instance { ai_base_score 0 } }
-HallowedGround2.merge { damage_instance { ai_base_score 0 } }
+HallowedGround.merge { spawn { ai_base_score -10 } }
+HallowedGround2.merge { spawn { ai_base_score -10 } }
 Enlighten.merge { damage_instance { ai_base_score 0 } }
 Enlighten2.merge { damage_instance { ai_base_score 0 } }
 Anoint.merge { damage_instance { ai_base_score 0 } }

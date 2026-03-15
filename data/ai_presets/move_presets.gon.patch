@@ -9,7 +9,7 @@ smart_hunter_move.merge {
     preferred_distance mov+reach
     total_distance_moved 0.01
     face_closest_enemy 1
-    danger_avoidance 3
+    danger_avoidance 10
     // Raised to 5 (inspired by prefer_tall_grass_always_move [cite: 6]) to maximize evasion
     tall_grass 5
 }
