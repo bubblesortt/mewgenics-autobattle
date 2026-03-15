@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.0.3] - 2026-03-15
+- Fix Conditional_Speculative Then parsing warning
+
+
 ## [1.0.2] - 2026-03-14
 - Fix autobattle issue
 
